@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue getting started</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+<div id="app">
+    <span v-if="visibleArea == 1">
+        this is {{visibleArea}} area!
+    </span>
+    <span v-else-if="visibleArea == 2">
+        this is {{visibleArea}} area!
+    </span>
+    <span v-else>
+        this is {{visibleArea}} area!
+    </span>
+</div>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            visibleArea: 1
+        }
+    });
+</script>
+</body>
+</html>

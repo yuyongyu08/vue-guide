@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue getting started</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+<div id="app">
+    frontend basic skills:
+    <ol>
+        <skill-item
+            v-for="skill in frontendSkills"
+            v-bind:item="skill"
+            v-bind:key="skill.id"
+        ></skill-item>
+    </ol>
+</div>
+<script>
+    Vue.component('skill-item', {
+        props: ['item'],
+        template: '<li>{{item.text}}</li>'
+    });
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            frontendSkills: [
+                {id: 0, text: 'HTML'},
+                {id: 1, text: 'CSS'},
+                {id: 2, text: 'JS'},
+            ]
+        }
+    });
+</script>
+</body>
+</html>

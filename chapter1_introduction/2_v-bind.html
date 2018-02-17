@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue getting started</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+<div id="app">
+    <span v-bind:title="tips">
+        Hover your mouse over me for a few seconds to see my dynamically bound title!
+    </span>
+</div>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            tips: 'you load this page on ' + new Date().toLocaleString()
+        }
+    });
+</script>
+</body>
+</html>
