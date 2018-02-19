@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>the vue instance</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+    {{ obj.foo  }}
+</div>
+<script>
+
+    var obj = {
+        foo: 'bar'
+    };
+
+    //this will prevents existing properties from being changed, which also means the reactivity system can’t track changes
+    Object.freeze(obj);
+
+    var vm_1 = new Vue({
+        el: '#app_1',
+        data(){
+            return {
+                obj
+            }
+        }
+    });
+
+    //this will no longer update view
+    vm_1.foo = 'this will not change.';
+
+
+</script>
+</body>
+</html>

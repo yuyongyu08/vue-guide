@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>the vue instance</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    {{ message }}
+    {{ tip }}
+</div>
+<script>
+    var data = {
+        message: 'Hello vue.js!'
+    };
+
+    var vm = new Vue({
+        el: '#app',
+        data: data
+    });
+
+    console.log(data.message === vm.message)
+
+    data.message = 'Vue.js';
+
+    console.log(vm.message);
+
+    vm.message = 'Hello';
+
+    console.log(data.message);
+
+
+    //add a new property, like below, but a exception will appear.
+    vm.tip = 'vue.js is easy!';
+
+    //the view will not change, because the properties in data are only *reactive* if they existed when the instance was created.
+    vm.tip = 'so easy!'
+
+</script>
+</body>
+</html>

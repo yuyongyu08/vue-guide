@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue getting started</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+<div id="app">
+    {{message}}
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!'
+        },
+        beforeCreate(){
+            console.log('call beforeCreate()');
+            console.log(this.message) //undefined
+        },
+        created(){
+            console.log('call created()');
+            console.log(this.message)
+        },
+        beforeMount(){
+            console.log('call beforeMount()');
+            console.log(this.message)
+        },
+        mounted(){
+            console.log('call mounted()');
+            console.log(this.message)
+        },
+        beforeUpdate(){
+            console.log('call beforeUpdate()');
+            console.log(this.message)
+        },
+        updated(){
+            console.log('call updated()');
+            console.log(this.message)
+        },
+        beforeDestroy(){
+            console.log('call beforeDestroy()');
+            console.log(this.message)
+        },
+        destroyed(){
+            console.log('call destroyed()');
+            console.log(this.message)
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue getting started</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+<div id="app">
+    <p>{{message}}</p>
+
+    <input v-model="message"/>
+</div>
+<script>
+    var data = {
+        message: 'Hello Vue!'
+    };
+
+    var vm = new Vue({
+        el: '#app',
+        data: data
+    });
+
+    //These instance properties and methods are prefixed with $ to differentiate them from user-defined properties.
+
+    console.log(vm.$data === data); //true
+
+    console.log(vm.$el === document.getElementById('app')); //true
+
+    vm.$watch('message', function (newValue, oldValue) {
+        console.log('new value: ', newValue);
+        console.log('old value: ', oldValue)
+    });
+
+    vm.message = 'Vue.js is so easy!'
+
+</script>
+</body>
+</html>
