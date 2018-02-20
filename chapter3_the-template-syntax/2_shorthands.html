@@ -3,20 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>vue getting started</title>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="../node_modules/vue/dist/vue.js"></script>
 </head>
 <body>
 <div id="app">
-    <!-- 1.v-bind shorthand-->
-
+    <h2>1.v-bind shorthand-</h2>
     <!--full syntax-->
     <a v-bind:href="vueUrl">vue official website</a>
     <!--shorthand syntax-->
     <a :href="vueUrl">vue official website</a>
 
 
-    <!-- 2.v-on shorthand-->
-
+    <h2>2.v-on shorthand</h2>
     <!--full syntax-->
     <div>message: {{message}}</div>
     <button v-on:click="doSomething()">change message</button>
@@ -32,6 +30,7 @@
         },
         methods: {
             doSomething: function () {
+                // `this` points to the vm instance
                 this.message = 'Vue.js is easy!'
             }
         }

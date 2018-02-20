@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue getting started</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h3>watch property:</h3>
+    {{fullName}}
+
+    <h3>computed property:</h3>
+    {{full_name}}
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            firstName: 'yu',
+            lastName: 'yongyu',
+            fullName: 'yuyongyu',
+            first_name: 'yu',
+            last_name: 'yongyu',
+        },
+        watch: {
+            firstName: function (newFirstName) {
+                this.fullName = newFirstName + ' ' + this.lastName;
+            },
+            lastName: function (newLastName) {
+                this.fullName = this.firstName + ' ' + newLastName;
+            }
+        },
+        computed: {
+            full_name: function () {
+                return this.first_name + ' ' + this.last_name;
+            }
+        }
+    });
+
+    vm.firstName = 'Yu';
+    vm.lastName = 'YongYu';
+
+    vm.first_name = 'Michael';
+    vm. last_name = 'Jackson';
+
+    //summary： watch property is imperative and repetitive
+
+</script>
+</body>
+</html>

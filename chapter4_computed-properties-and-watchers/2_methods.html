@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue getting started</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h3>original:</h3>
+    <p>{{message}}</p>
+
+    <h3>computed:</h3>
+    <p>{{reversedMessage}}</p>
+
+    <h3>By method:</h3>
+    <p>{{reverseMessage()}}</p>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!'
+        },
+        computed: {
+            reversedMessage: function () {
+                return this.message.split(' ').reverse().join(' ');
+            }
+        },
+        methods: {
+            reverseMessage: function () {
+                return this.message.split(' ').reverse().join(' ');
+            }
+        }
+    });
+
+    // computed properties VS methods
+    //1.computed properties are cached based on their dependencies
+    //2.method invocation will always run the function whenever a re-render happens
+    //3.we have an expensive computed property, use computed property, otherwise use method
+
+
+</script>
+</body>
+</html>

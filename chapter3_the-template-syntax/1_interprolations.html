@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>vue getting started</title>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="../node_modules/vue/dist/vue.js"></script>
 </head>
 <body>
 <div id="app">
-    <!-- 1. Text -->
+    <h2>1. Text</h2>
     <p>{{message}}</p>
 
     <!-- v-once view will not update on data change -->
@@ -19,19 +19,19 @@
     </p>
 
 
-    <!-- 2. Raw HTML -->
+    <h2>2. Raw HTML</h2>
     <p>Using mustaches: {{ rawHtml }}</p>
     <p>Using v-html directive: <span v-html="rawHtml"></span></p>
 
 
-    <!-- 3. Attributes -->
+    <h2>3. Attributes</h2>
     <div v-bind:id="dynamicId">bind element attribute</div>
 
     <!--if isButtonDisabled is null/undefined/false, the disabled attribute will not render.-->
     <button v-bind:disabled="isButtonDisabled">stateful button</button>
 
 
-    <!-- 4. Using JavaScript Expressions -->
+    <h2>4. Using JavaScript Expressions</h2>
     <div>
         <div>{{ 1 + 1 }}</div>
         <div>{{ false ? 'YES' : 'NO' }}</div>
