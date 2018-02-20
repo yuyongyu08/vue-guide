@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue getting started</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h2>Object Syntax</h2>
+    <p v-bind:style="{color: activeColor, fontSize: fontSize + 'px'}">
+        The object syntax for v-bind:style is like CSS ,except it's a JavaScript object.
+    </p>
+    <p v-bind:style="styleObject">
+        The object syntax can be a style object directly!
+    </p>
+
+    <h2>Array Syntax</h2>
+    <p v-bind:style="[baseStyles, overridingStyles]">
+        The array syntax for v-bind:style allows you to apply multiple style objects to same elements.
+    </p>
+
+    <h2>Auto-prefixing</h2>
+    <p v-bind:style="autoPrefixStyleObject">
+        Vue will automatically detect and add appropriate prefixes when use a CSS property that requires vendor prefixes in v-bind:style.
+    </p>
+
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            activeColor: 'red',
+            fontSize: 20,
+            styleObject: {
+                color: 'red',
+                fontSize: '20px'
+            },
+            baseStyles: {
+                color: 'green',
+                fontSize: '20px'
+            },
+            overridingStyles: {
+                border: '1px solid green'
+            },
+            autoPrefixStyleObject: {
+                transform: 'translateX(50%)'
+            }
+        }
+    });
+</script>
+</body>
+</html>

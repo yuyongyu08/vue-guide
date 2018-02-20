@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue getting started</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <style>
+        .active{
+            border: 1px solid green;
+        }
+
+        .text-danger{
+            color: red;
+        }
+
+        .big{
+            font-size: 24px
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <h1>1. Object Syntax</h1>
+    <h3>Object Syntax</h3>
+    <p v-bind:class="{active: isActive, 'text-danger': hasError}">
+        We can pass an object to v-bind:class to dynamically toggle classes
+    </p>
+
+
+    <h3>co-exist with the plain class</h3>
+    <p class="big" v-bind:class="{active: isActive, 'text-danger': hasError}">
+        The v-bind:class directive can also co-exist with the plain class attribute.
+    </p>
+
+    <h3>Inline Object Syntax</h3>
+    <div v-bind:class="classObject">
+        The bound object on v-bind:class can be inline
+    </div>
+
+
+    <h3>Computed Property Syntax</h3>
+    <div v-bind:class="computedClassObject">
+        We can also bind to a computed property that returns an object
+    </div>
+
+
+
+
+    <h1>2. Array Syntax</h1>
+    <p v-bind:class="[activeClass, errorClass]">
+        We can pass an array to v-bind:class to apply a list of classes
+    </p>
+
+    <p v-bind:class="[isActive ? activeClass : '', errorClass]">
+        We can also toggle a class with a ternary expression in the list conditionally.
+    </p>
+
+    <p v-bind:class="[{ active : isActive }, errorClass]">
+        We can also use object syntax inside array syntax.
+    </p>
+
+
+
+
+    <h1>3. With Components</h1>
+    <my-component class="active text-danger">
+        We can use the class attribute on a custom component, those classes will be added to the component’s root element and will not be overwritten.
+    </my-component>
+
+    <my-component v-bind:class="{active: isActive, 'text-danger': hasError}">
+        The class bindings also use on the custom component.
+    </my-component>
+
+</div>
+<script>
+    //Make sure the component is registered before you instantiate the root Vue instance!!!
+    Vue.component('my-component', {
+        template: '<p class="big"><slot></slot></p>'
+    });
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            isActive: true,
+            hasError: true,
+            classObject: {active: true, 'text-danger': true},
+            activeClass: 'active',
+            errorClass: 'text-danger'
+        },
+        computed: {
+            computedClassObject: function () {
+                return {
+                    active: this.isActive,
+                    'text-danger': this.hasError
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>
