@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue getting started</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h1>1. v-if、v-else-if、v-else</h1>
+    <h3>open browser console, change vm.type (A、B、C), then observe the view </h3>
+    <div v-if="type == 'A'">
+        The v-if directive is attached to a single element.
+    </div>
+    <template v-else-if="type == 'B'">
+        <p>What if we want to toggle more than one element? </p>
+        <strong>We can use v-if on a \< template \> element.</strong>
+        <strong>this element is an invisible wrapper, the final rendered result will not include the template element.</strong>
+    </template>
+    <div v-else="type == 'C'">
+        A v-else element must immediately follow a v-if or a v-else-if element - otherwise it will not be recognized.
+    </div>
+
+    <h1>2.controlling reusable element with key</h1>
+    <h2>vue re-using same element instead id rendering from scratch</h2>
+    <template v-if="loginType === 'username'">
+        <label>Username</label>
+        <input placeholder="Enter your username">
+    </template>
+    <template v-else>
+        <label>Email</label>
+        <input placeholder="Enter your email address">
+    </template>
+    <button @click="toggleLoginType()">toggle login type</button>
+
+    <h2>adding a key attribute with unique values can separate completely</h2>
+    <template v-if="loginType === 'username'">
+        <label>Username</label>
+        <input placeholder="Enter your username" key="username-input">
+    </template>
+    <template v-else>
+        <label>Email</label>
+        <input placeholder="Enter your email address" key="email-input">
+    </template>
+    <button @click="toggleLoginType()">toggle login type</button>
+
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            type: 'A',
+            loginType: 'username'
+        },
+        methods: {
+            toggleLoginType: function () {
+                if(this.loginType == 'username'){
+                    this.loginType = 'email'
+                }else{
+                    this.loginType = 'username'
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue getting started</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h1>1. v-show</h1>
+    <p v-show="show">The element with v-show will always be rendered and remain in the DOM, it only toggles the <code>display</code> CSS property of the element</p>
+    <template v-show="show">v-show doesn’t support the template element, this paragraph always show!</template>
+
+
+    <h1>2. v-if VS v-show</h1>
+
+    <ol>
+        <li v-if="!show">
+            <p>The block with v-if won't be rendered until the conditions becomes true for first time,</p>
+            <p>and this block will be properly destroyed and re-created during toggles</p>
+        </li>
+        <li v-show="!show">
+            The element with v-show always rendered regardless of initial condition, with CSS-based toggling.
+        </li>
+        <li>
+            Prefer v-show if you need to toggle something very often<br/>
+            Prefer v-if if the condition is unlikely to change at runtime.
+        </li>
+    </ol>
+
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            show: true
+        }
+    });
+</script>
+</body>
+</html>
