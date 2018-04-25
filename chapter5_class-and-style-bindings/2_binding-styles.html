@@ -7,22 +7,23 @@
 </head>
 <body>
 <div id="app">
-    <h2>Object Syntax</h2>
+    <h2>1. 对象形式</h2>
     <p v-bind:style="{color: activeColor, fontSize: fontSize + 'px'}">
-        The object syntax for v-bind:style is like CSS ,except it's a JavaScript object.
+        v-bind:style="{color: activeColor, fontSize: fontSize + 'px'}"
     </p>
     <p v-bind:style="styleObject">
-        The object syntax can be a style object directly!
+        v-bind:style="styleObject"
     </p>
 
-    <h2>Array Syntax</h2>
+    <h2>2. 数组形式</h2>
     <p v-bind:style="[baseStyles, overridingStyles]">
-        The array syntax for v-bind:style allows you to apply multiple style objects to same elements.
+        v-bind:style="[baseStyles, overridingStyles]"
     </p>
 
     <h2>Auto-prefixing</h2>
     <p v-bind:style="autoPrefixStyleObject">
         Vue will automatically detect and add appropriate prefixes when use a CSS property that requires vendor prefixes in v-bind:style.
+
     </p>
 
 </div>

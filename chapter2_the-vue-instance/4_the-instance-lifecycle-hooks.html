@@ -8,6 +8,7 @@
 <body>
 <div id="app">
     {{message}}
+    <button @click="changeMessage()">改变</button>
 </div>
 <script>
     var vm = new Vue({
@@ -15,36 +16,41 @@
         data: {
             message: 'Hello Vue!'
         },
+        methods:{
+            changeMessage(){
+                this.message = '注意观察Vue的生命周期'
+            }
+        },
         beforeCreate(){
-            console.log('call beforeCreate()');
-            console.log(this.message) //undefined
+            console.log('beforeCreate() called');
+            console.log(this.message) //undefined，created()前不能访问属性
         },
         created(){
-            console.log('call created()');
+            console.log('created() called');
             console.log(this.message)
         },
         beforeMount(){
-            console.log('call beforeMount()');
+            console.log('beforeMount() called');
             console.log(this.message)
         },
         mounted(){
-            console.log('call mounted()');
+            console.log('mounted() called');
             console.log(this.message)
         },
         beforeUpdate(){
-            console.log('call beforeUpdate()');
+            console.log('beforeUpdate() called');
             console.log(this.message)
         },
         updated(){
-            console.log('call updated()');
+            console.log('updated() called');
             console.log(this.message)
         },
         beforeDestroy(){
-            console.log('call beforeDestroy()');
+            console.log('beforeDestroy() called');
             console.log(this.message)
         },
         destroyed(){
-            console.log('call destroyed()');
+            console.log('destroyed() called');
             console.log(this.message)
         }
     });

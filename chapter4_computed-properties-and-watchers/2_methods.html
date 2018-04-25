@@ -15,6 +15,19 @@
 
     <h3>By method:</h3>
     <p>{{reverseMessage()}}</p>
+
+    <br/>
+    <br/>
+    <br/>
+    <div style="color: red">
+        <h3>计算属性 VS 方法</h3>
+        <ul>
+            <li>计算属性会基于它的依赖进行缓存</li>
+            <li>重新渲染时，方法总会被执行</li>
+            <li>有复杂计算时就用计算属性，否则就用方法</li>
+        </ul>
+    </p>
+
 </div>
 <script>
     var vm = new Vue({
@@ -34,10 +47,7 @@
         }
     });
 
-    // computed properties VS methods
-    //1.computed properties are cached based on their dependencies
-    //2.method invocation will always run the function whenever a re-render happens
-    //3.we have an expensive computed property, use computed property, otherwise use method
+
 
 
 </script>

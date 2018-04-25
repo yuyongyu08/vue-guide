@@ -12,6 +12,8 @@
 
     <h3>computed:</h3>
     <p>{{reversedMessage}}</p>
+
+    <button @click="changeMessage()">update</button>
 </div>
 <script>
     var vm = new Vue({
@@ -23,12 +25,13 @@
             reversedMessage: function () {
                 return this.message.split(' ').reverse().join(' ');
             }
+        },
+        methods:{
+            changeMessage(){
+                this.message = 'good bye'
+            }
         }
     });
-
-    //vm.reverseMessage will update when vm.message changes
-
-    vm.message = 'goodbye';
 
 </script>
 </body>

@@ -7,6 +7,15 @@
 </head>
 <body>
 <div id="app">
+    <input type="radio" id="one" value="1" v-model="visibleArea">
+    <label for="one">One</label>
+    <br>
+    <input type="radio" id="two" value="2" v-model="visibleArea">
+    <label for="two">Two</label>
+    <br>
+    <input type="radio" id="tree" value="3" v-model="visibleArea">
+    <label for="two">Three</label>
+    <br>
     <span v-if="visibleArea == 1">
         this is {{visibleArea}} area!
     </span>

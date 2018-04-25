@@ -20,55 +20,55 @@
 </head>
 <body>
 <div id="app">
-    <h1>1. Object Syntax</h1>
-    <h3>Object Syntax</h3>
+    <h1>1. 对象形式</h1>
+    <h3>对象</h3>
     <p v-bind:class="{active: isActive, 'text-danger': hasError}">
-        We can pass an object to v-bind:class to dynamically toggle classes
+        我们可以给v-bind:class传入一个对象来动态切换class
     </p>
 
 
-    <h3>co-exist with the plain class</h3>
+    <h3>与普通class属性共存</h3>
     <p class="big" v-bind:class="{active: isActive, 'text-danger': hasError}">
-        The v-bind:class directive can also co-exist with the plain class attribute.
+        v-bind:class可以和其他普通class属性共存
     </p>
 
-    <h3>Inline Object Syntax</h3>
+    <h3>内联对象</h3>
     <div v-bind:class="classObject">
-        The bound object on v-bind:class can be inline
+        将一个对象以内联的形式绑定到v-bind:class
     </div>
 
 
-    <h3>Computed Property Syntax</h3>
+    <h3>计算属性</h3>
     <div v-bind:class="computedClassObject">
-        We can also bind to a computed property that returns an object
+        绑定到一个返回对象的计算属性（computed property）
     </div>
 
 
 
 
-    <h1>2. Array Syntax</h1>
+    <h1>2. 数组形式</h1>
     <p v-bind:class="[activeClass, errorClass]">
-        We can pass an array to v-bind:class to apply a list of classes
+        传递给v-bind:class一个class数组
     </p>
 
     <p v-bind:class="[isActive ? activeClass : '', errorClass]">
-        We can also toggle a class with a ternary expression in the list conditionally.
+        传递给v-bind:class一个三目运算符
     </p>
 
     <p v-bind:class="[{ active : isActive }, errorClass]">
-        We can also use object syntax inside array syntax.
+        在数组中使用对象
     </p>
 
 
 
 
-    <h1>3. With Components</h1>
+    <h1>3. 组件应用</h1>
     <my-component class="active text-danger">
-        We can use the class attribute on a custom component, those classes will be added to the component’s root element and will not be overwritten.
+        可以给自定义组件添加class属性，这些class属性会被添加到组件的根元素上，并不会被重写
     </my-component>
 
     <my-component v-bind:class="{active: isActive, 'text-danger': hasError}">
-        The class bindings also use on the custom component.
+        自定义组件也可以用v-bind:class
     </my-component>
 
 </div>

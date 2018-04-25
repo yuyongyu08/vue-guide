@@ -12,6 +12,13 @@
 
     <h3>computed property:</h3>
     {{full_name}}
+    
+    <br/>
+    <br/>
+    <br/>
+    <button @click="update()">update</button>
+
+    <div style="color: red"> summary： watch property is imperative(命令式) and repetitive（重复的）</div>
 </div>
 <script>
     var vm = new Vue({
@@ -35,16 +42,21 @@
             full_name: function () {
                 return this.first_name + ' ' + this.last_name;
             }
+        },
+        methods:{
+            update(){
+                this.firstName = 'Yu';
+                this.lastName = 'YongYu';
+
+                this.first_name = 'Michael';
+                this.last_name = 'Jackson';
+            }
         }
     });
 
-    vm.firstName = 'Yu';
-    vm.lastName = 'YongYu';
+    
 
-    vm.first_name = 'Michael';
-    vm. last_name = 'Jackson';
 
-    //summary： watch property is imperative and repetitive
 
 </script>
 </body>

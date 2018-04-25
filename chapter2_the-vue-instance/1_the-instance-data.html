@@ -9,6 +9,12 @@
 <div id="app">
     {{ message }}
     {{ tip }}
+    <button onclick="changeMessageByData()">改变信息（通过data）</button>
+    <button onclick="changeMessageByVM()">改变信息（通过vm）</button>
+    <button onclick="addMessageByVM()">增加信息（通过vm）</button>
+
+    <br/>
+    <strong style="color: red">通过vm.[data]的形式（直接给Vue实例赋值）会报异常，也就是说，Vue的属性要在实例创建前已经生命。</strong>
 </div>
 <script>
     var data = {
@@ -20,22 +26,26 @@
         data: data
     });
 
-    console.log(data.message === vm.message)
+    function changeMessageByData() {
+        data.message = '我是通过data.message改变数据';
+        console.log(data.message === vm.message)
+    }
 
-    data.message = 'Vue.js';
+    function changeMessageByVM() {
+        data.message = '我是通过vm.message改变数据';
+        console.log(data.message === vm.message)
+    }
 
-    console.log(vm.message);
 
-    vm.message = 'Hello';
-
-    console.log(data.message);
+    function addMessageByVM() {
+        vm.tip = 'vue.js is easy!';
+    }
 
 
     //add a new property, like below, but a exception will appear.
-    vm.tip = 'vue.js is easy!';
 
     //the view will not change, because the properties in data are only *reactive* if they existed when the instance was created.
-    vm.tip = 'so easy!'
+    // vm.tip = 'so easy!'
 
 </script>
 </body>
