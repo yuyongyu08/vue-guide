@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue getting started</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h2>1.v-for直接循环整数</h2>
+    <ul>
+        <li v-for="n in 10">{{n}}</li>
+    </ul>
+
+    <h2>2.v-for循环代码块</h2>
+    <ul>
+        <template v-for="n in 10">
+            <li>{{n}}</li>
+            <hr/>
+        </template>
+    </ul>
+
+    <h2>3.v-for VS v-if</h2>
+    <h4>v-for和v-if在同一节点上时，v-for优先级更高(v-if会在每一个循环上独立执行)</h4>
+    <ul>
+        <li v-for="n in 10" v-if="n % 2 === 0">{{n}}</li>
+    </ul>
+    <h4>如果通过v-if控制v-for的执行，在外面包裹元素（例如template元素）</h4>
+    <ul v-if="false">
+        <li v-for="n in 10">{{n}}</li>
+    </ul>
+    <template v-else>没有可执行的循环</template>
+
+
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!'
+        }
+    });
+</script>
+</body>
+</html>
