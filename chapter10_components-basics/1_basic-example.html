@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue getting started</title>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+     <button-counter></button-counter>
+     <button-counter></button-counter>
+
+    <h4>总结：</h4>
+    <ul>
+        <li>组件是Vue实例，所以配置项除了没有挂载点el，其他全相同</li>
+        <li>组件间作用域相互独立，互不影响</li>
+        <li style="color: red">组件要在Vue实例前声明，才能被其引用</li>
+        <li style="color: red">
+            组件的data<strong style="font-size: 20px">必须</strong>是function(编译就会报错)，否则相互间影响
+        </li>
+    </ul>
+</div>
+<script>
+    Vue.component('button-counter', {
+        data: function () {
+            return {
+                count: 0
+            }
+        },
+        template: '<button @click="count++">你点击了{{count}}次</button>'
+    });
+
+    new Vue({
+        el: '#app'
+    });
+
+</script>
+</body>
+</html>
