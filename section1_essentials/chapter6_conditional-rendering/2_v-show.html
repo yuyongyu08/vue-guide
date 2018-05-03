@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-show</title>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h1>1. v-show</h1>
+    <p v-show="show">
+        加v-show的元素总是被渲染并保留在DOM中，它只是切换css中的display属性
+    </p>
+    <template v-show="show">v-show不适用于template元素，此段落始终显示</template>
+
+
+    <h1>2. v-if VS v-show</h1>
+    <input type="checkbox" id="checkbox" v-model="showDetail">
+    <label for="checkbox">显示详情</label>
+    <ol>
+        <li v-if="!showDetail">
+            带有v-if的区域只有在条件首次变成true时才会渲染，并且此区域在切换期间会适时销毁和重新渲染。
+        </li>
+        <li v-show="!showDetail">
+            无论初始条件如何带有v-show的的元素总是渲染，它基于css进行切换
+        </li>
+        <li>
+            如果频繁切换首选v-show<br/>
+            如果判断条件在运行时不大可能改变首选v-if
+        </li>
+    </ol>
+
+    <h1>3.v-if VS v-for</h1>
+    <p>当v-if和v-for一起使用时，<span style="color: red">v-for的优先级高于v-if (什么意思？先运行循环的每一个迭代，然后再处理v-if)</span></p>
+    <input type="checkbox" id="checkbox_1" v-model="showAllDirectives">
+    <label for="checkbox">显示所有条件指令</label>
+    <ul>
+        <li v-for="directive in conditionalDirectives" v-if="showAllDirectives">{{directive}}</li>
+    </ul>
+
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            show: true,
+            showDetail: false,
+            showAllDirectives: false,
+            conditionalDirectives: ['v-if', 'v-show']
+        }
+    });
+</script>
+</body>
+</html>

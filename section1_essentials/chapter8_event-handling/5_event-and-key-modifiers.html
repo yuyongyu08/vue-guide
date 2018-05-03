@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue getting started</title>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+    <style>
+        .parent{
+            display: inline-block;
+            height: 80px;
+            width: 200px;
+        }
+
+        .child{
+            display: inline-block;
+            height: 40px;
+            min-width: 100px;
+            background: #000066;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <h3>引入修饰符的原因</h3>
+    <p>
+        Vue认为业务方法应该专注于业务逻辑，而不应该处理DOM事件的细节。所以在调用之前就先对事件的细节做了区分和处理。
+    </p>
+
+
+    <h3>1.事件修饰符</h3>
+    <ul>
+        <li>.stop：阻止事件冒泡</li>
+        <li>.prevent：阻止默认行为</li>
+        <li>.capture</li>
+        <li>
+            .self：事件的目标是元素自身，而不是子元素，才会出发事件<br/>
+            <div class="parent" @click.self="changeColor" :style="{background: newColor ? 'red':'green'}">
+                父元素：点击次区域有效
+                <span class="child">子元素:点击次区域无效</span>
+            </div>
+        </li>
+        <li>
+            .once：只执行一次<br/>
+            <button @click.once="increase">@click.once：点击多次，只会执行一次</button>
+            <p>
+                点击次数：{{counter}}
+            </p>
+        </li>
+        <li>.passive</li>
+    </ul>
+
+    <h3>2.按键修饰符</h3>
+    <dl>
+        <dt>(1)普通按键修饰符</dt>
+        <dd>
+            <ul>
+                <!--普通按键修饰符-->
+                <li>
+                    .enter<br/>
+                    <input @keyup.enter="enterTrigger" placeholder="点击输入框，回车有惊喜" style="width: 150px">
+                </li>
+                <li>.tab</li>
+                <li>.delete</li>
+                <li>.esc</li>
+                <li>.space</li>
+                <li>.up</li>
+                <li>.down</li>
+                <li>.left</li>
+                <li>.right</li>
+            </ul>
+        </dd>
+    </dl>
+    <dl>
+        <dt>(2)系统按键修饰符</dt>
+        <dd>
+            <ul>
+                <!--系统按键修饰符-->
+                <li>.ctrl</li>
+                <li>.alt</li>
+                <li>.shift</li>
+                <li>
+                    .meta(Mac：⌘，Window：⊞)<br/>
+                    <button @click.meta="metaTrigger">⌘ + Ctrl</button>
+                </li>
+            </ul>
+        </dd>
+    </dl>
+    <dl>
+        <dt>(3)鼠标按键修饰符</dt>
+        <dd>
+            <ul>
+                <!--鼠标按键修饰符-->
+                <li>.left</li>
+                <li>.right</li>
+                <li>.middle</li>
+            </ul>
+        </dd>
+    </dl>
+
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            counter: 0,
+            newColor: false
+        },
+        methods:{
+            increase(){
+                this.counter++
+            },
+            changeColor(){
+                this.newColor = !this.newColor
+            },
+            enterTrigger () {
+                alert('回车键：我触发了此事件！是我！')
+            },
+            metaTrigger () {
+                alert('⌘ 触发');
+            }
+        }
+    });
+</script>
+</body>
+</html>

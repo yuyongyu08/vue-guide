@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue getting started</title>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h2>
+        组件命名有两种方式
+    </h2>
+    <ul>
+        <li>
+            烤串标示<br/>
+            <my-first-component></my-first-component>
+        </li>
+        <li>
+            驼峰标示<br/>
+            <my-second-component></my-second-component>
+        </li>
+    </ul>
+
+    <h3>注意：</h3>
+    <ul>
+        <li>无论是哪种方式命名，直接在DOM中使用的时候，只能用烤串形式</li>
+        <li>
+            驼峰标示命名的组件可以以驼峰的形式用于其他组件中<br/>
+            例如：<my-third-component></my-third-component>
+        </li>
+    </ul>
+</div>
+<script>
+    Vue.component('my-first-component', {
+        template: `<div>这是烤串标示命名的组件<slot></slot></div>`
+    });
+
+    Vue.component('mySecondComponent', {
+        template: `<div>这是驼峰标示命名的组件<slot></slot></div>`
+    });
+
+    Vue.component('my-third-component', {
+        template: `<div>这是第三个组件<mySecondComponent></mySecondComponent></div>`
+    });
+
+
+
+
+    new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!'
+        }
+    });
+</script>
+</body>
+</html>

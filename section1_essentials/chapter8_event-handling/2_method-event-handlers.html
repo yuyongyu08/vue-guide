@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>method event handler</title>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <button v-on:click="greet">v-on:click方式</button>
+    <button onclick="sayHi()">onclick方式</button>
+</div>
+
+<h2>注意点：</h2>
+<ul>
+    <li>v-on后面可以只写方法名</li>
+    <li>监听的方法在执行时默认传入event参数，但通过vue实例调用的方式不会传入event参数</li>
+
+</ul>
+<script>
+     var vm = new Vue({
+        el: '#app',
+        data: {
+            name: 'Vue.js'
+        },
+        methods: {
+            greet(even){
+                alert('Hello ' + this.name);
+
+                if(even){
+                    console.log(even);
+                    alert(even.target.tagName);
+                }
+            }
+        }
+    });
+
+     function sayHi() {
+         vm.greet();
+     }
+</script>
+</body>
+</html>

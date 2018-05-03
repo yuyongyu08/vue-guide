@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue getting started</title>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+    <style>
+        .active{
+            border: 1px solid green;
+        }
+
+        .text-danger{
+            color: red;
+        }
+
+        .big{
+            font-size: 24px
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <h1>1. 对象形式</h1>
+    <h3>对象</h3>
+    <p v-bind:class="{active: isActive, 'text-danger': hasError}">
+        我们可以给v-bind:class传入一个对象来动态切换class
+    </p>
+
+
+    <h3>与普通class属性共存</h3>
+    <p class="big" v-bind:class="{active: isActive, 'text-danger': hasError}">
+        v-bind:class可以和其他普通class属性共存
+    </p>
+
+    <h3>内联对象</h3>
+    <div v-bind:class="classObject">
+        将一个对象以内联的形式绑定到v-bind:class
+    </div>
+
+
+    <h3>计算属性</h3>
+    <div v-bind:class="computedClassObject">
+        绑定到一个返回对象的计算属性（computed property）
+    </div>
+
+
+
+
+    <h1>2. 数组形式</h1>
+    <p v-bind:class="[activeClass, errorClass]">
+        传递给v-bind:class一个class数组
+    </p>
+
+    <p v-bind:class="[isActive ? activeClass : '', errorClass]">
+        传递给v-bind:class一个三目运算符
+    </p>
+
+    <p v-bind:class="[{ active : isActive }, errorClass]">
+        在数组中使用对象
+    </p>
+
+
+
+
+    <h1>3. 组件应用</h1>
+    <my-component class="active text-danger">
+        可以给自定义组件添加class属性，这些class属性会被添加到组件的根元素上，并不会被重写
+    </my-component>
+
+    <my-component v-bind:class="{active: isActive, 'text-danger': hasError}">
+        自定义组件也可以用v-bind:class
+    </my-component>
+
+</div>
+<script>
+    //Make sure the component is registered before you instantiate the root Vue instance!!!
+    Vue.component('my-component', {
+        template: '<p class="big"><slot></slot></p>'
+    });
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            isActive: true,
+            hasError: true,
+            classObject: {active: true, 'text-danger': true},
+            activeClass: 'active',
+            errorClass: 'text-danger'
+        },
+        computed: {
+            computedClassObject: function () {
+                return {
+                    active: this.isActive,
+                    'text-danger': this.hasError
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue getting started</title>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <li>
+            全局组件-无需在实例中注册<br/>
+            <my-global-component></my-global-component>
+        </li>
+        <li>
+            局部组件-必须在实例中注册<br/>
+            <my-local-component-a></my-local-component-a>
+        </li>
+        <li>
+            局部组件中嵌套局部组件-必须在局部组件中注册<br/>
+            <my-local-component-b></my-local-component-b>
+        </li>
+    </ul>
+</div>
+<script>
+    Vue.component('my-global-component', {
+        template: `<div>这是个全局组件</div>`
+    });
+
+    let myLocalComponentA = {
+        name: 'my-local-component-a',
+        template: `<div>这是个局部组件a</div>`
+    };
+
+    let myLocalComponentB = {
+        name: 'my-local-component-b',
+        template: `<div>这是个局部组件b<my-local-component-a></my-local-component-a></div>`,
+        components: {
+            myLocalComponentA
+        }
+    };
+
+    new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!'
+        },
+        components: {
+            myLocalComponentA,
+            myLocalComponentB
+        }
+    });
+</script>
+</body>
+</html>

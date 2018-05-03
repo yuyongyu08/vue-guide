@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>the vue instance</title>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+    {{ obj.foo  }}
+    <button @click="changeProp()">改变冻结的属性</button>
+    <br/>
+    <strong style="color: red">被Object.freeze(obj)处理过的对象，无法被修改，交互系统（reactivity system）也就无法追踪到它的变化，试图也就无法改变</strong>
+</div>
+<script>
+
+    var obj = {
+        foo: 'bar'
+    };
+
+    //this will prevents existing properties from being changed, which also means the reactivity system can’t track changes
+    Object.freeze(obj);
+
+    var vm_1 = new Vue({
+        el: '#app',
+        data(){
+            return {
+                obj
+            }
+        },
+        methods:{
+            changeProp(){
+                this.obj.foo = 'this will not change.';
+
+                console.log(this.obj);
+            }
+
+
+        }
+    });
+
+
+
+</script>
+</body>
+</html>

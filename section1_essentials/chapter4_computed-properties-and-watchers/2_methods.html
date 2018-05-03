@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue getting started</title>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h3>original:</h3>
+    <p>{{message}}</p>
+
+    <h3>computed:</h3>
+    <p>{{reversedMessage}}</p>
+
+    <h3>By method:</h3>
+    <p>{{reverseMessage()}}</p>
+
+    <br/>
+    <br/>
+    <br/>
+    <div style="color: red">
+        <h3>计算属性 VS 方法</h3>
+        <ul>
+            <li>计算属性会基于它的依赖进行缓存</li>
+            <li>重新渲染时，方法总会被执行</li>
+            <li>有复杂计算时就用计算属性，否则就用方法</li>
+        </ul>
+    </p>
+
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!'
+        },
+        computed: {
+            reversedMessage: function () {
+                return this.message.split(' ').reverse().join(' ');
+            }
+        },
+        methods: {
+            reverseMessage: function () {
+                return this.message.split(' ').reverse().join(' ');
+            }
+        }
+    });
+
+
+
+
+</script>
+</body>
+</html>

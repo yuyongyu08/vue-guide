@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue getting started</title>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h3>v-model一般绑定静态值，我们也可以绑定到Vue实例的动态属性上</h3>
+    <dl>
+        <dt>1.复选框(默认：勾选-true，不勾选-false)</dt>
+        <dd>
+            <input id="s-cb" type="checkbox" v-model="checkboxValue"  true-value="Yes" false-value="No">
+            <label for="s-cb">{{checkboxValue}}</label>
+
+            <br/>比尔盖茨，你是否会捐出全部遗产：{{checkboxValue}}
+        </dd>
+    </dl>
+
+
+    <dl>
+        <dt>2.单选按钮</dt>
+        <dd>
+            <input type="radio" id="m" :value="'男'" v-model="radioValue">
+            <label for="m">男</label>
+            <input type="radio" id="f" :value="'女'" v-model="radioValue">
+            <label for="f">女</label>
+
+            <br/>你选择的性别：
+            <div style="white-space: pre-line;">{{radioValue}}</div>
+        </dd>
+    </dl>
+
+    <dl>
+        <dt>3.下拉框</dt>
+        <dd>
+            <strong>下拉单选框</strong><br/>
+            <select v-model="selectValue">
+                <option disabled :value="''">请选择</option>
+                <option :value="{name: '貂蝉', age: '18'}">貂蝉</option>
+                <option :value="{name: '西施', age: '17'}">西施</option>
+                <option :value="{name: '昭君', age: '16'}">昭君</option>
+                <option :value="{name: '玉环', age: '15'}">玉环</option>
+            </select>
+            <div>
+                你选择的美女：{{selectValue}}
+            </div>
+        </dd>
+    </dl>
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            checkboxValue: '',
+            radioValue: '男',
+            selectValue: '',
+        }
+    });
+</script>
+</body>
+</html>

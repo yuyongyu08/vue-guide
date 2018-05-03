@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue getting started</title>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h3>original:</h3>
+    <p>{{message}}</p>
+
+    <h3>computed:</h3>
+    <p>{{reversedMessage}}</p>
+
+    <button @click="changeMessage()">update</button>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!'
+        },
+        computed: {
+            reversedMessage: function () {
+                return this.message.split(' ').reverse().join(' ');
+            }
+        },
+        methods:{
+            changeMessage(){
+                this.message = 'good bye'
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

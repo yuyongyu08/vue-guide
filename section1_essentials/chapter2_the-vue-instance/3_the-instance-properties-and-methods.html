@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue getting started</title>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <p>{{message}}</p>
+
+    <input v-model="message"/>
+    <br/>
+
+    <div>vm.$data === data：{{isEqual1()}}</div>
+    <div>vm.$el === document.getElementById('app')：{{isEqual2()}}</div>
+
+    <strong style="color: red">Vue实例的属性和方法通过以$开头来区别于用户自定一的属性</strong>
+</div>
+<script>
+    var data = {
+        message: 'Hello Vue!'
+    };
+
+    var vm = new Vue({
+        el: '#app',
+        data: data,
+        methods:{
+            isEqual1(){
+                return vm.$data === data;
+            },
+            isEqual2(){
+                return vm.$el === document.getElementById('app');
+            }
+        }
+    });
+
+    vm.$watch('message', function (newValue, oldValue) {
+        console.log('new value: ', newValue);
+        console.log('old value: ', oldValue)
+    });
+
+    vm.message = 'Vue.js is so easy!'
+
+</script>
+</body>
+</html>

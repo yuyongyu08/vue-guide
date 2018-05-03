@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>listening to events</title>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h3>v-on指令作用</h3>
+    <ul>
+        <li>监听DOM事件</li>
+        <li>运行js</li>
+    </ul>
+
+    <button v-on:click="increaseCounter()">点击-监听事件</button>
+    <button v-on:click="counter++">点击-运行js</button>
+    <p>你一共点击了{{counter}}次</p>
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            counter: 0
+        },
+        methods:{
+            increaseCounter(){
+                this.counter++;
+            }
+        }
+    });
+</script>
+</body>
+</html>

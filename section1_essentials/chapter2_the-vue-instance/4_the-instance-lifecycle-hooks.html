@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue getting started</title>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    {{message}}
+    <button @click="changeMessage()">改变</button>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!'
+        },
+        methods:{
+            changeMessage(){
+                this.message = '注意观察Vue的生命周期'
+            }
+        },
+        beforeCreate(){
+            console.log('beforeCreate() called');
+            console.log(this.message) //undefined，created()前不能访问属性
+        },
+        created(){
+            console.log('created() called');
+            console.log(this.message)
+        },
+        beforeMount(){
+            console.log('beforeMount() called');
+            console.log(this.message)
+        },
+        mounted(){
+            console.log('mounted() called');
+            console.log(this.message)
+        },
+        beforeUpdate(){
+            console.log('beforeUpdate() called');
+            console.log(this.message)
+        },
+        updated(){
+            console.log('updated() called');
+            console.log(this.message)
+        },
+        beforeDestroy(){
+            console.log('beforeDestroy() called');
+            console.log(this.message)
+        },
+        destroyed(){
+            console.log('destroyed() called');
+            console.log(this.message)
+        }
+    });
+</script>
+</body>
+</html>

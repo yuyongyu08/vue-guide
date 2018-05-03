@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue getting started</title>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h2>1. 对象形式</h2>
+    <p v-bind:style="{color: activeColor, fontSize: fontSize + 'px'}">
+        v-bind:style="{color: activeColor, fontSize: fontSize + 'px'}"
+    </p>
+    <p v-bind:style="styleObject">
+        v-bind:style="styleObject"
+    </p>
+
+    <h2>2. 数组形式</h2>
+    <p v-bind:style="[baseStyles, overridingStyles]">
+        v-bind:style="[baseStyles, overridingStyles]"
+    </p>
+
+    <h2>Auto-prefixing</h2>
+    <p v-bind:style="autoPrefixStyleObject">
+        Vue will automatically detect and add appropriate prefixes when use a CSS property that requires vendor prefixes in v-bind:style.
+
+    </p>
+
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            activeColor: 'red',
+            fontSize: 20,
+            styleObject: {
+                color: 'red',
+                fontSize: '20px'
+            },
+            baseStyles: {
+                color: 'green',
+                fontSize: '20px'
+            },
+            overridingStyles: {
+                border: '1px solid green'
+            },
+            autoPrefixStyleObject: {
+                transform: 'translateX(50%)'
+            }
+        }
+    });
+</script>
+</body>
+</html>

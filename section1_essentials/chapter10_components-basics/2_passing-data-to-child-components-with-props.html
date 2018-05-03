@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue getting started</title>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h2>1.通过props向组件传递数据</h2>
+    <blog-title v-for="blog in blogs" :title="blog.title" :key="blog.id"></blog-title>
+
+    <h2>2.组件只能有一个根元素，Vue提供的template不可以作为根元素</h2>
+    <blog :post="lastBlog"></blog>
+</div>
+<script>
+     Vue.component('blog-title', {
+         props:['title'],
+         template: '<h4>{{ title }}</h4>'
+     });
+
+     Vue.component('blog', {
+         props:['post'],
+         template:
+             `<div>
+                <h4>标题：{{ post.title }}</h4>
+                <p>内容：{{ post.content }}</p>
+             </div>`
+     });
+
+
+    new Vue({
+        el: '#app',
+        data: {
+            blogs: [
+                {
+                    id: 1,
+                    title: '朝鲜为什么选择改革开放？'
+                },
+                {
+                    id: 2,
+                    title: '朝鲜与韩国开启破冰之旅'
+                },
+                {
+                    id: 3,
+                    title: '朝韩关系升温对中国的影响'
+                }
+            ],
+            lastBlog: {
+                title: '美国对于朝韩关系升温有何举动',
+                content: '美国一直在朝韩之间迂回不息，此次朝韩合作，可能不是美国愿意看到的，不过，它现在深陷叙利亚战争无暇估计。'
+            }
+        }
+    });
+</script>
+</body>
+</html>
