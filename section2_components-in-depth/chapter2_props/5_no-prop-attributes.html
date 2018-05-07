@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue getting started</title>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+    <style>
+        .date-picker-theme-dark, .user-input{
+            border: 1px solid red;
+        }
+
+
+    </style>
+</head>
+<body>
+<div id="app">
+    <h2>No-Prop Attributes：传入组件，但没有相应定义的属性</h2>
+    <p>
+        由于组件库无法预见它可能被使用的上下文，所以组件可以接收任意属性，这些属性会被添加到根元素。
+    </p>
+
+
+    <h3>替换/合并已存在的属性</h3>
+    <bootstrap-date-input type="date" data-date-picker="activated" class="date-picker-theme-dark"></bootstrap-date-input>
+    <ul>
+        <li>根元素上不存在的属性：直接添加到根元素上</li>
+        <li>
+            根元素上存在的属性：<br/>
+            <ul>
+                <li>替换：如type="text"</li>
+                <li>合并：如class、style</li>
+            </ul>
+        </li>
+    </ul>
+
+
+    <h3>禁用属性继承</h3>
+    <basic-input
+            v-model="username"
+            class="user-input"
+            placeholder="请输入用户名"
+            style="background: #eeeeee"
+    ></basic-input>
+    <h4>要点：</h4>
+    <ul>
+        <li>使用inheritAttrs: false和$attrs，可以手动将属性指向指定元素</li>
+        <li>此规则不适用于class、style属性</li>
+    </ul>
+
+
+</div>
+<script>
+    let bootstrapDateInput = Vue.component('bootstrap-date-input', {
+        template: `<input type="text" class="form-control">`
+    });
+
+    let basicInput = Vue.component('basic-input', {
+        inheritAttrs: false,
+        props: ['label', 'value'],
+        template: `
+            <label>
+                {{ label }}
+                <input
+                    v-bind="$attrs"
+                    v-bind:value="value"
+                    >
+            </label>
+        `
+    });
+
+    new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!',
+            username: 'yuyy'
+        },
+        components: {
+            bootstrapDateInput,
+            basicInput
+        }
+    });
+</script>
+</body>
+</html>

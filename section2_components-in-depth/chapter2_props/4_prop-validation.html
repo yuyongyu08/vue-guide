@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue getting started</title>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <my-component
+            :prop-a="10"
+            prop-b="hello vue!"
+            prop-c="Vue hello!"
+            :prop-f="'success'"
+    ></my-component>
+
+    <h2>type的值可为：</h2>
+    <ul>
+        <li>String</li>
+        <li>Number</li>
+        <li>Boolean</li>
+        <li>Function</li>
+        <li>Object</li>
+        <li>Array</li>
+        <li>Symbol</li>
+        <li>自定义构造函数</li>
+    </ul>
+</div>
+<script>
+    let myComponent = Vue.component('my-component', {
+        props: {
+            //数字类型校验
+            propA: Number,
+
+            //多类型校验
+            propB: [String, Number],
+
+            //必传项校验
+            propC: {
+                type: String,
+                required: true
+            },
+
+            //带默认值的数字类型校验
+            propD: {
+                type: Number,
+                default: 100
+            },
+
+            //对象类型校验，默认值必须是个工厂函数
+            propE: {
+                type: Object,
+                default: function () {
+                    return {
+                        message: '对象默认值必须要用一个工长方法'
+                    }
+                }
+            },
+
+            //自定义校验
+            propF: {
+                validator: function (value) {
+                    return ['success', 'warning', 'danger'].indexOf(value) !== -1
+                }
+            }
+        },
+        template: `
+            <ul>
+               <li>propA: {{propA}}</li>
+               <li>propB: {{propB}}</li>
+               <li>propC: {{propC}}</li>
+               <li>propD: {{propD}}</li>
+               <li>propE: {{propE}}</li>
+               <li>propF: {{propF}}</li>
+            </ul>
+        `
+    });
+
+    new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!'
+        },
+        components: {
+            myComponent
+        }
+    });
+</script>
+</body>
+</html>

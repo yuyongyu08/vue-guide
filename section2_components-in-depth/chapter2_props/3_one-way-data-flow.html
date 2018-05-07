@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue getting started</title>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    父作用域: <input v-model="message">
+    <my-component :message="message"></my-component>
+
+    <h2>Vue组件是单向数据绑定</h2>
+    <ul>
+        <li>父作用域修改属性，子组件会随之改变</li>
+        <li>子组件内修改来自父作用域的属性，会报错</li>
+    </ul>
+
+    <h2>子组件修改父作用域属性，常见如下2种情况</h2>
+    <ul>
+        <li>
+            传入的属性作为初始值
+            <my-component-a :message="message"></my-component-a>
+        </li>
+        <li>
+            传入的属性需要被转换
+            <my-component-b :message="message"></my-component-b>
+        </li>
+    </ul>
+
+
+</div>
+<script>
+    let myComponent = Vue.component('my-component', {
+       props: ['message'],
+       template: `
+            <div>
+                子组件：<input v-model="message">
+            </div>
+        `
+    });
+
+    let myComponentA = Vue.component('my-component', {
+        props: ['message'],
+        data: function () {
+            return {
+                tip: this.message
+            }
+        },
+        template: `
+            <div>
+                子组件：<input v-model="tip">
+                输入的：{{tip}}
+            </div>
+        `
+    });
+
+    let myComponentB = Vue.component('my-component', {
+        props: ['message'],
+        computed: {
+            formattedMessage: function () {
+                return this.message.trim().toLowerCase();
+            }
+        },
+        template: `
+            <div>
+                子组件：{{formattedMessage}}
+            </div>
+        `
+    });
+
+    new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!'
+        },
+        components: {
+            myComponent,
+            myComponentA,
+            myComponentB,
+        }
+    });
+</script>
+</body>
+</html>

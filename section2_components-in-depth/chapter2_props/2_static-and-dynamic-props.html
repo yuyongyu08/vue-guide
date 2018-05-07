@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue getting started</title>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+    <style>
+        .post{
+            background: #dedede;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <h2>1.静态赋值</h2>
+    <blog-post
+            title="组件的属性赋值：静态属性和动态属性"
+            content="静态属性：直接在组件调用处赋值即可；动态属性：需要借助v-bind赋值"
+            likes="99"
+            favorited
+            :comments="['数组和对象即便是静态值，也必须用v-bind', '如果想将对象的所有属性作为组件属性，直接绑定对象即可']"
+            :my-comment="{
+                    title: '尽量用动态属性',
+                    content: '动态属性更加灵活，修改时仅需要修改data中的值即可。如果不会变化的属性也可考虑静态属性。'
+                }"
+    ></blog-post>
+
+    <h2>2.动态赋值</h2>
+    <blog-post
+            :title="post.title"
+            :content="post.content"
+            :likes="post.likes"
+            :favorited="post.favorited"
+            :comments="post.comments"
+            :my-comment="post.myComment"
+    ></blog-post>
+
+    <h2>3.对象所有属性作为组件属性</h2>
+    <blog-post v-bind="post"></blog-post>
+</div>
+<script>
+    let blogPost = Vue.component('blog-post', {
+        props: [
+            'title',
+            'content',
+            'likes',
+            'favorited',
+            'comments',
+            'myComment'
+        ],
+        template: `
+            <div class="post">
+                <h2>{{title}}</h2>
+                <p>{{content}}</p>
+                <div>点赞数：{{likes}}</div>
+                <div>是否已收藏：{{ favorited ? '是' : '否' }}</div>
+                <div>
+                    评论者：
+                    <ul>
+                        <li v-for="comment in comments">{{comment}}</li>
+                    </ul>
+                </div>
+                <div>
+                    我的评论：
+                    <div>
+                        <h4>{{myComment.title}}</h4>
+                        <p>{{myComment.content}}</p>
+                    </div>
+                </div>
+            </div>
+        `
+    });
+
+    new Vue({
+        el: '#app',
+        data: {
+            post: {
+                title: '组件的属性赋值：静态属性和动态属性',
+                content: '静态属性：直接在组件调用处赋值即可；动态属性：需要借助v-bind赋值',
+                likes: 99,
+                favorited: false,
+                comments: ['数组和对象即便是静态值，也必须用v-bind', '如果想将对象的所有属性作为组件属性，直接绑定对象即可'],
+                myComment: {
+                    title: '尽量用动态属性',
+                    content: '动态属性更加灵活，修改时仅需要修改data中的值即可。如果不会变化的属性也可考虑静态属性。'
+                }
+            }
+        },
+        components: {
+            blogPost
+        }
+    });
+</script>
+</body>
+</html>

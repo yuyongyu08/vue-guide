@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue getting started</title>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <blog-post post-title="组件属性声明时用驼峰标示，使用时用烤串标示"></blog-post>
+</div>
+<script>
+    let blogPost = Vue.component('blog-post', {
+        props:['postTitle'],
+        template: `<h2>{{postTitle}}</h2>`
+    });
+
+    new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!'
+        },
+        components: {
+            blogPost
+        }
+    });
+</script>
+</body>
+</html>
