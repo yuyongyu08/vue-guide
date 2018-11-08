@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>vue getting started</title>
+    <title>components names</title>
     <script src="../../node_modules/vue/dist/vue.js"></script>
 </head>
 <body>
@@ -13,7 +13,7 @@
     <ul>
         <li>
             烤串标示<br/>
-            <my-first-component></my-first-component>
+        <my-first-component></my-first-component>
         </li>
         <li>
             驼峰标示<br/>
@@ -23,7 +23,11 @@
 
     <h3>注意：</h3>
     <ul>
-        <li>无论是哪种方式命名，直接在DOM中使用的时候，只能用烤串形式</li>
+        <li>
+            无论是哪种方式命名，直接在DOM中使用的时候，只能用烤串形式<br/>
+            <!--TODO-->
+            待完善：<strong>Note, however, that only kebab-case names are valid directly in the DOM (i.e. non-string templates).</strong>
+        </li>
         <li>
             驼峰标示命名的组件可以以驼峰的形式用于其他组件中<br/>
             例如：<my-third-component></my-third-component>
@@ -49,7 +53,7 @@
     new Vue({
         el: '#app',
         data: {
-            message: 'Hello Vue!'
+            message: 'Hello Vue!',
         }
     });
 </script>

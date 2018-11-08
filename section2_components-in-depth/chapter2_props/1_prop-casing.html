@@ -2,17 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>vue getting started</title>
+    <title>prop casing</title>
     <script src="../../node_modules/vue/dist/vue.js"></script>
 </head>
 <body>
 <div id="app">
-    <blog-post post-title="组件属性声明时用驼峰标示，使用时用烤串标示"></blog-post>
+    <blog-post post-title="组件属性(props)声明时用驼峰(camelCase)标示，使用时用烤串(kebab-case)标示"></blog-post>
 </div>
 <script>
     let blogPost = Vue.component('blog-post', {
         props:['postTitle'],
-        template: `<h2>{{postTitle}}</h2>`
+        template: `<div>
+                         <h2>{{postTitle}}</h2>
+                         待完善：<strong>if you’re using string templates, this limitation does not apply.</strong>
+                   </div>`
     });
 
     new Vue({

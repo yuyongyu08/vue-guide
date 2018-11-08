@@ -2,15 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>vue getting started</title>
+    <title>one way data flow</title>
     <script src="../../node_modules/vue/dist/vue.js"></script>
 </head>
 <body>
 <div id="app">
     父作用域: <input v-model="message">
-    <my-component :message="message"></my-component>
+    <my-component :msg="message"></my-component>
 
-    <h2>Vue组件是单向数据绑定</h2>
+    <h2>Vue组件是单向(父->子)数据绑定</h2>
     <ul>
         <li>父作用域修改属性，子组件会随之改变</li>
         <li>子组件内修改来自父作用域的属性，会报错</li>
@@ -19,12 +19,12 @@
     <h2>子组件修改父作用域属性，常见如下2种情况</h2>
     <ul>
         <li>
-            传入的属性作为初始值
-            <my-component-a :message="message"></my-component-a>
+            传入的属性作为初始值：用props在data中定义一个局部属性
+            <my-component-a :msg="message"></my-component-a>
         </li>
         <li>
-            传入的属性需要被转换
-            <my-component-b :message="message"></my-component-b>
+            传入的属性需要被转换：用props定义一个计算属性
+            <my-component-b :msg="message"></my-component-b>
         </li>
     </ul>
 
@@ -32,39 +32,39 @@
 </div>
 <script>
     let myComponent = Vue.component('my-component', {
-       props: ['message'],
+       props: ['msg'],
        template: `
             <div>
-                子组件：<input v-model="message">
+                子组件：<input v-model="msg">
             </div>
         `
     });
 
-    let myComponentA = Vue.component('my-component', {
-        props: ['message'],
+    let myComponentA = Vue.component('my-component-a', {
+        props: ['msg'],
         data: function () {
             return {
-                tip: this.message
+                tip: this.msg
             }
         },
         template: `
             <div>
-                子组件：<input v-model="tip">
+                子组件A：<input v-model="tip">
                 输入的：{{tip}}
             </div>
         `
     });
 
-    let myComponentB = Vue.component('my-component', {
-        props: ['message'],
+    let myComponentB = Vue.component('my-component-b', {
+        props: ['msg'],
         computed: {
             formattedMessage: function () {
-                return this.message.trim().toLowerCase();
+                return this.msg.trim().toLowerCase().split('').reverse().join('');
             }
         },
         template: `
             <div>
-                子组件：{{formattedMessage}}
+                子组件B：{{ formattedMessage }}
             </div>
         `
     });

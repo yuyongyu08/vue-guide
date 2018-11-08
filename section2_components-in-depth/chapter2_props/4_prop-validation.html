@@ -7,11 +7,26 @@
 </head>
 <body>
 <div id="app">
+    <div>
+        propA:
+        <input type="radio" v-model="propsData.a" value="10">数字10
+        <input type="radio" v-model="propsData.a" value="'10'">字符串10
+    </div>
+    <div>
+        propB:
+        <input type="radio" v-model="propsData.b" value="10">数字10
+        <input type="radio" v-model="propsData.b" value="'10'">字符串10
+    </div>
+
+
+
+
+
     <my-component
-            :prop-a="10"
-            prop-b="hello vue!"
-            prop-c="Vue hello!"
-            :prop-f="'success'"
+            :prop-a="propsData.a"
+            :prop-b="propsData.b"
+            :prop-c="propsData.c"
+            :prop-f="propsData.f"
     ></my-component>
 
     <h2>type的值可为：</h2>
@@ -27,13 +42,13 @@
     </ul>
 </div>
 <script>
-    let myComponent = Vue.component('my-component', {
+    Vue.component('my-component', {
         props: {
             //数字类型校验
             propA: Number,
 
             //多类型校验
-            propB: [String, Number],
+            propB: [Object, Number],
 
             //必传项校验
             propC: {
@@ -52,7 +67,7 @@
                 type: Object,
                 default: function () {
                     return {
-                        message: '对象默认值必须要用一个工长方法'
+                        message: '对象默认值必须要用一个工厂方法！！！'
                     }
                 }
             },
@@ -66,12 +81,12 @@
         },
         template: `
             <ul>
-               <li>propA: {{propA}}</li>
-               <li>propB: {{propB}}</li>
-               <li>propC: {{propC}}</li>
-               <li>propD: {{propD}}</li>
-               <li>propE: {{propE}}</li>
-               <li>propF: {{propF}}</li>
+               <li>propA（数字类型校验）: {{propA}}</li>
+               <li>propB（多类型校验）: {{propB}}</li>
+               <li>propC（必传项校验）: {{propC}}</li>
+               <li>propD（带默认值的数字类型校验）: {{propD}}</li>
+               <li>propE（对象类型校验）: {{propE}}</li>
+               <li>propF（自定义校验）: {{propF}}</li>
             </ul>
         `
     });
@@ -79,10 +94,12 @@
     new Vue({
         el: '#app',
         data: {
-            message: 'Hello Vue!'
-        },
-        components: {
-            myComponent
+            propsData: {
+                a: 10,
+                b: {},
+                c: 'vue!',
+                f: 'success'
+            }
         }
     });
 </script>
