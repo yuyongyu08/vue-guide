@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>props的默认值</title>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <user-info :user-data="user"></user-info>
+</div>
+
+
+<h2>要点：</h2>
+<ul>
+    <li>组件中props中的default主要的应用场景：预防props没有传入</li>
+    <li>props有传入无论时空对象还是null，default都不会被使用。</li>
+</ul>
+<script>
+    //全局组件
+    let userInfo = Vue.component('userInfo' ,{
+        name: 'user-info',
+        props: {
+            userData: {
+                default(){
+                    return {
+                        name: 'yuyy',
+                        gender: 'male',
+                        birthday: '1991-7'
+                    }
+                }
+            }
+        },
+        data() {
+          return {
+
+          }
+        },
+        template: `
+            <div>
+                <div>姓名：{{userData.name}}</div>
+                <div>性别：{{userData.gender}}</div>
+                <div>生日：{{userData.birthday}}</div>
+            </div>
+        `
+    });
+
+
+    //Vue实例
+    new Vue({
+        el: '#app',
+        data: {
+            user: {}
+        },
+        components: {
+            userInfo
+        }
+    });
+</script>
+</body>
+</html>

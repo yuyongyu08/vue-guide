@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用props初始化computed</title>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app" style="text-align: center">
+    <user-info :user-data="user"></user-info>
+</div>
+
+<h2>要点：</h2>
+<ul>
+    <li>props是单向的，父组件的数据变化，通过props实时反应在自组件中</li>
+    <li>不允许在子组件中直接操作props</li>
+    <li>
+        可以间接操作props
+        <ul>
+            <li>方法一：在data中声明局部变量，并用props初始化。<strong style="color: red">弊端：局部变量不随着props更新而更新</strong></li>
+            <li>方法二：在computed中对props值转换后输出</li>
+        </ul>
+    </li>
+</ul>
+<script>
+    //全局组件
+    let userInfo = Vue.component('userInfo' ,{
+        name: 'user-info',
+        props: {
+            userData: Object
+        },
+        data() {
+          return {
+
+          }
+        },
+        computed: {
+            userName(){
+                return this.userData.name
+            }
+        },
+        methods:{
+          changeProps(){
+              //修改props本身，警告
+              // this.userData = {
+              //     name: '',
+              //     gender: '',
+              //     birthday: ''
+              // };
+
+              //修改props中的属性，不警告
+              this.userData.name = 'yuyy'
+          }
+        },
+        template: `
+            <div>
+                <div>姓名：{{ userName }}</div>
+                <div>性别：{{ userData.gender }}</div>
+                <div>生日：{{ userData.birthday }}</div>
+                <button @click="changeProps">修改props</button>
+            </div>
+        `
+    });
+
+
+    //Vue实例
+    new Vue({
+        el: '#app',
+        data: {
+            user: {
+                name: '',
+                gender: '',
+                birthday: ''
+            }
+        },
+        created(){
+           this.getUserData();
+        },
+        methods:{
+            getUserData(){
+                setTimeout(()=>{
+                    this.user = {
+                        name: '于永雨',
+                        gender: '男',
+                        birthday: '1991-7'
+                    }
+                }, 500)
+            }
+        },
+        components: {
+            userInfo
+        }
+    });
+</script>
+</body>
+</html>

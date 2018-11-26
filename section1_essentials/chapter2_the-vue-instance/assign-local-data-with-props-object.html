@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用props初始化data中变量2</title>
+    <script src="../../node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app" style="text-align: center">
+    <user-info :user-data="user"></user-info>
+</div>
+<script>
+    //全局组件
+    let userInfo = Vue.component('userInfo' ,{
+        name: 'user-info',
+        props: {
+            userData: Object
+        },
+        data() {
+          return {
+              userName: this.userData.name
+          }
+        },
+        template: `
+            <div>
+                <div>姓名：{{userName.text}}</div>
+                <div>性别：{{userData.gender}}</div>
+                <div>生日：{{userData.birthday}}</div>
+            </div>
+        `
+    });
+
+
+    //Vue实例
+    new Vue({
+        el: '#app',
+        data: {
+            user: {
+                name: {text: ''},
+                gender: '',
+                birthday: ''
+            }
+        },
+        created(){
+           this.getUserData();
+        },
+        methods:{
+            getUserData(){
+                setTimeout(()=>{
+                    this.user = {
+                        name: {text: '于永雨'},
+                        gender: '男',
+                        birthday: '1991-7'
+                    }
+                }, 500)
+            }
+        },
+        components: {
+            userInfo
+        }
+    });
+</script>
+</body>
+</html>
