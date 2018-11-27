@@ -2,14 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>用props初始化computed</title>
-    <script src="../../node_modules/vue/dist/vue.js"></script>
+    <title>解决方案：watch、computed</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
 </head>
 <body>
-<div id="app" style="text-align: center">
+<div id="app">
     <user-info :user-data="user"></user-info>
 </div>
-
 <h2>要点：</h2>
 <ul>
     <li>props是单向的，父组件的数据变化，通过props实时反应在自组件中</li>
@@ -31,33 +30,25 @@
         },
         data() {
           return {
-
+            userName: this.userData.name
           }
         },
         computed: {
-            userName(){
+            computedUserName(){
                 return this.userData.name
             }
         },
-        methods:{
-          changeProps(){
-              //修改props本身，警告
-              // this.userData = {
-              //     name: '',
-              //     gender: '',
-              //     birthday: ''
-              // };
-
-              //修改props中的属性，不警告
-              this.userData.name = 'yuyy'
-          }
+        watch: {
+            'userData.name': function (val) { //监听props中的属性
+                this.userName = val;
+            }
         },
         template: `
             <div>
-                <div>姓名：{{ userName }}</div>
+                <div>姓名(watch)：{{ userName }}</div>
+                <div>姓名(computed)：{{ computedUserName }}</div>
                 <div>性别：{{ userData.gender }}</div>
                 <div>生日：{{ userData.birthday }}</div>
-                <button @click="changeProps">修改props</button>
             </div>
         `
     });
