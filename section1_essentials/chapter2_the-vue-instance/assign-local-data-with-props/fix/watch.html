@@ -33,11 +33,6 @@
             userName: this.userData.name
           }
         },
-        computed: {
-            computedUserName(){
-                return this.userData.name
-            }
-        },
         watch: {
             'userData.name': function (val) { //监听props中的属性
                 this.userName = val;
@@ -45,8 +40,7 @@
         },
         template: `
             <div>
-                <div>姓名(watch)：{{ userName }}</div>
-                <div>姓名(computed)：{{ computedUserName }}</div>
+                <div>姓名：{{ userName }}</div>
                 <div>性别：{{ userData.gender }}</div>
                 <div>生日：{{ userData.birthday }}</div>
             </div>
@@ -70,11 +64,9 @@
         methods:{
             getUserData(){
                 setTimeout(()=>{
-                    this.user = {
-                        name: '于永雨',
-                        gender: '男',
-                        birthday: '1991-7'
-                    }
+                    this.user.name = '于永雨';
+                    this.user.gender = '男';
+                    this.user.birthday = '1991-7';
                 }, 500)
             }
         },
